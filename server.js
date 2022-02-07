@@ -1,37 +1,14 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const { userRoutes } = require('./routes/usersRoutes')
 
 const app = express();
-
-const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 8000;
 
-const mockUserData = [
-    { name: 'Mark'},
-    { name: 'Jill'}
-]
-
-app.get("/users", (req, res) => {
-    res.json(
-        {
-            success: true,
-            message: 'Successfuly got users. Nice!',
-            users: mockUserData
-        });
-});
-
-app.get("/users/:id", (req, res) => {
-    let { id } = req.params;
-
-    res.json({
-        success: true,
-        message: 'Successfuly got one user',
-        user: id
-    });
-
-});
+app.use("/users", userRoutes);
 
 app.post("/login", (req, res) => {
     const {username, password} = req.body;
