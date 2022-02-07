@@ -16,6 +16,17 @@ app.get("/users", (req, res) => {
             message: 'Successfuly got users. Nice!',
             users: mockUserData
         });
+});
+
+app.get("/users/:id", (req, res) => {
+    let { id } = req.params;
+
+    res.json({
+        success: true,
+        message: 'Successfuly got one user',
+        user: id
+    });
+    
 })
 
 app.listen(PORT, () => {
